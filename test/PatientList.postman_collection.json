@@ -1,0 +1,55 @@
+{
+	"id": "304177ce-cf27-42f3-b05a-583cafecf2a8",
+	"name": "PatientList",
+	"description": "",
+	"order": [
+		"0ab5d52f-3c36-600a-6468-c0c3c8b12b2e",
+		"882c1a93-f02f-1717-6757-b61c17c9c1f3"
+	],
+	"folders": [],
+	"timestamp": 1485205834079,
+	"owner": "1460149",
+	"public": false,
+	"requests": [
+		{
+			"id": "0ab5d52f-3c36-600a-6468-c0c3c8b12b2e",
+			"headers": "",
+			"url": "http://localhost:3000/patientrecords/",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "304177ce-cf27-42f3-b05a-583cafecf2a8",
+			"data": null,
+			"dataMode": "params",
+			"name": "Get All Patient Records",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1485205834079,
+			"version": 2,
+			"responses": [],
+			"tests": "var jsonData = JSON.parse(responseBody);\ntests[\"Expect a lot of records\"] = jsonData.length > 100;",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "882c1a93-f02f-1717-6757-b61c17c9c1f3",
+			"headers": "",
+			"url": "http://localhost:3000/patientrecords/57b240c6c6c51a0900000143",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "304177ce-cf27-42f3-b05a-583cafecf2a8",
+			"data": null,
+			"dataMode": "params",
+			"name": "Get a Patient Record",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1485205861618,
+			"version": 2,
+			"responses": [],
+			"tests": "var jsonData = JSON.parse(responseBody);\ntests[\"Expect Correct Patient Return\"] = jsonData.patient.meta.name.last === \"Palmer\";",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		}
+	]
+}

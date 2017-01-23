@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+<div class="container">
+  <table class="table table-hover">
+    <tbody>
+      <tr>
+        <th><button class="btn btn-default" ng-click="sortBy('patient.meta.name.last')">Name</button>
+          <span class="sortorder" ng-show="propertyName === 'patient.meta.name.last'" ng-class="{reverse: reverse}"></span>
+        </th>
+        <th><button class="btn btn-default" ng-click="sortBy('patient.meta.dob')">Birthday</button>
+          <span class="sortorder" ng-show="propertyName === 'patient.meta.dob'" ng-class="{reverse: reverse}"></span></th>
+
+        <th><button class="btn btn-default" ng-click="sortBy('patient._id')">ID</button>
+          <span class="sortorder" ng-show="propertyName === 'patient._id'" ng-class="{reverse: reverse}"></span></th>
+
+        <th><button class="btn btn-default" ng-click="sortBy('patient.meta.office.name')">Office</button>
+          <span class="sortorder" ng-show="propertyName === 'patient.meta.office.name'" ng-class="{reverse: reverse}"></span></th>
+
+        <th><button class="btn btn-default" ng-click="sortBy('referring.provider.name.sortable')">Provider</button>
+          <span class="sortorder" ng-show="propertyName === 'referring.provider.name.sortable'" ng-class="{reverse: reverse}"></span></th>
+
+        <th><button class="btn btn-default" ng-click="sortBy('status.name')">Status</button>
+          <span class="sortorder" ng-show="propertyName === 'status.name'" ng-class="{reverse: reverse}"></span></th>
+
+      </tr>
+      <tr ng-repeat="pr in patientRecords | orderBy:propertyName:reverse" style="cursor:pointer">
+<td>
+  <a ng-href="#/patientrecord/{{pr._id}}">{{ pr.patient.meta.name.first }} {{ pr.patient.meta.name.last }}</a>
+</td>
+<td>
+  {{ pr.patient.meta.dob | date:'mediumDate' }}
+</td>
+<td>
+  {{ pr.patient._id }}
+</td>
+
+<td>
+  {{pr.patient.meta.office.name}}
+</td>
+
+<td>
+  {{pr.referring.provider.name.sortable}}
+</td>
+
+<td>
+  {{pr.status.name}}
+</td>
+
+</tr>
+</tbody>
+</table>
+</div>

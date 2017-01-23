@@ -1,0 +1,41 @@
+<div class="row" ng-hide="patientrecord._id">
+  <div class="col-md-6">
+      <h2>Edit Patient Record</h2>
+  </div>
+</div>
+<div class="container">
+  <div>
+    <p>
+      <label>First Name</label> 
+      <input id="fname" class="form-control" type="text" ng-model="patientrecord.patient.meta.name.first" required> 
+    </p>
+    <p>
+      <label>Last Name</label> 
+      <input id="lname" class="form-control" type="text" ng-model="patientrecord.patient.meta.name.last" required> 
+    </p>
+    <p>
+      <label>DOB</label> 
+      <input id="dob" class="form-control" type="text" ng-value="patientrecord.patient.meta.dob | date:'mediumDate'" ng-readonly="true"> 
+    </p>
+    <p>
+      <label>ID</label> 
+      <input id="id" class="form-control" type="text" ng-model="patientrecord.patient._id" ng-readonly="true"> 
+    </p>
+    <p>
+      <label>Office</label> 
+      <input id="office" class="form-control" type="text" ng-model="patientrecord.patient.meta.office.name" ng-readonly="true"> 
+    </p>
+    <p>
+      <label>Provider</label> 
+      <input id="provider" class="form-control" type="text" ng-model="patientrecord.referring.provider.name.sortable" ng-readonly="true"> 
+    </p>
+    <p>
+      <label>Status</label> 
+      <input id="status" class="form-control" type="text" ng-model="patientrecord.status.name" ng-readonly="true"> 
+    </p>
+    <p>
+      <button style="margin-top:20px" class="btn btn-default" ng-click="savePatientRecord(patientrecord)">Save</button>
+      <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Back</button>
+    </p>
+  </div>
+</div>
