@@ -1,4 +1,7 @@
 import Interfaces = Domain.Interfaces;
+import PatientRecord = Domain.Classes.PatientRecord;
+import IHttpPromiseCallbackArg = angular.IHttpPromiseCallbackArg;
+import IHttpPromise = angular.IHttpPromise;
 angular.module("patientRecordsApp", ['ngRoute'])
     .config(($routeProvider) => {
         $routeProvider
@@ -23,7 +26,7 @@ angular.module("patientRecordsApp", ['ngRoute'])
         const API_PATH = "/patientrecords/";
         this.getPatientRecords = function () {
             return $http.get(API_PATH)
-                .then((response: Interfaces.IPatientRecord[]) => {
+                .then((response: IHttpPromiseCallbackArg<Interfaces.IPatientRecord>[]) => {
                     return response;
                 }, (response) => {
                     alert("Error finding patient records.");
@@ -32,7 +35,7 @@ angular.module("patientRecordsApp", ['ngRoute'])
         this.getPatientRecord = (patientRecordId) => {
             const url = API_PATH + patientRecordId;
             return $http.get(url)
-                .then((response: Interfaces.IPatientRecord[]) => {
+                .then((response: IHttpPromiseCallbackArg<Interfaces.IPatientRecord>[]) => {
                     return response;
                 }, (response) => {
                     alert("Error finding this record.");
@@ -42,7 +45,7 @@ angular.module("patientRecordsApp", ['ngRoute'])
             const url = API_PATH + patientRecord._id;
             console.log(patientRecord._id);
             return $http.put(url, patientRecord)
-                .then((response: Interfaces.IPatientRecord[]) => {
+                .then((response: IHttpPromise<any>) => {
                     return response;
                 }, (response) => {
                     alert("Error editing this record.");
@@ -52,7 +55,7 @@ angular.module("patientRecordsApp", ['ngRoute'])
         this.deletePatientRecord = (patientRecordId) => {
             const url = API_PATH + patientRecordId;
             return $http.delete(url)
-                .then((response: Interfaces.IPatientRecord[]) => {
+                .then((response: IHttpPromise<any>) => {
                     return response;
                 }, (response) => {
                     alert("Error deleting this patient record.");
@@ -61,7 +64,10 @@ angular.module("patientRecordsApp", ['ngRoute'])
         }
     })
     .controller("ListController", (patientRecords, $scope) => {
-        $scope.patientRecords = patientRecords.data;
+        $scope.patientRecords = [];
+        patientRecords.data.forEach((pr) => {
+            $scope.patientRecords.push(new PatientRecord(pr));
+        });
 
         $scope.propertyName = 'patient.meta.name.last';
         $scope.reverse = false;
@@ -89,7 +95,8 @@ angular.module("patientRecordsApp", ['ngRoute'])
         }
 
         $scope.savePatientRecord = (patientrecord: Interfaces.IPatientRecord) => {
-            PatientRecords.editPatientRecord(patientrecord);
+            const updatedPatientRecord = new PatientRecord(patientrecord);
+            PatientRecords.editPatientRecord(updatedPatientRecord);
             $scope.editMode = false;
             $scope.patientRecordFormUrl = "";
         }
