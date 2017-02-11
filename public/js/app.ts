@@ -26,7 +26,7 @@ angular.module("patientRecordsApp", ['ngRoute'])
         const API_PATH = "/patientrecords/";
         this.getPatientRecords = function () {
             return $http.get(API_PATH)
-                .then((response: IHttpPromiseCallbackArg<Interfaces.IPatientRecord>[]) => {
+                .then((response: IHttpPromiseCallbackArg<Interfaces.IPatientRecord[]>) => {
                     return response;
                 }, (response) => {
                     alert("Error finding patient records.");
@@ -35,7 +35,8 @@ angular.module("patientRecordsApp", ['ngRoute'])
         this.getPatientRecord = (patientRecordId) => {
             const url = API_PATH + patientRecordId;
             return $http.get(url)
-                .then((response: IHttpPromiseCallbackArg<Interfaces.IPatientRecord>[]) => {
+                .then((response: IHttpPromiseCallbackArg<Interfaces.IPatientRecord[]>) => {
+                    const x = response.data;
                     return response;
                 }, (response) => {
                     alert("Error finding this record.");
